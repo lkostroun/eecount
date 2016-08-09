@@ -89,8 +89,12 @@ def readurls():
         next(reader, None)
         for row in reader:
             linkedin_url = row[80]
-            company_size = get_company_size_from_url(linkedin_url)
-            print(row[141], company_size)
+            try:
+                company_size = get_company_size_from_url(linkedin_url)
+                print(row[141], company_size)
+            except:
+                print("Error parsing company information {0}".format(row[141]))
+                continue
 
 if __name__ == "__main__":
     readurls()
